@@ -22,8 +22,11 @@ spec:
         set -eu
         echo "Removing all files from ${WORKSPACE_SOURCE_PATH} ..."
         if [ -d "${WORKSPACE_SOURCE_PATH}" ] ; then
+          echo "Delete non-hidden files and directories"
           rm -rf "${WORKSPACE_SOURCE_PATH:?}"/* 
-          rm -rf "${WORKSPACE_SOURCE_PATH}"/.[!.]* 
+          echo "Delete files and directories starting with . but excluding .."
+          rm -rf "${WORKSPACE_SOURCE_PATH}"/.[!.]*
+          echo "Delete files and directories starting with .. plus any other character"
           rm -rf "${WORKSPACE_SOURCE_PATH}"/..?* 
         fi
 
